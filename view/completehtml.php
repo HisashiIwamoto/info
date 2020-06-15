@@ -11,12 +11,12 @@
 </head>
 
 <body>
-  <p><?php echo $name; ?></p>
-  <p><?php echo $mail; ?></p>
-  <p><?php echo $info; ?></p>
-  <p><?php echo $work; ?></p>
+  <p>name:<?php echo $name; ?></p>
+  <p>mail:<?php echo $mail; ?></p>
+  <p>info:<?php echo $info; ?></p>
+  <p>work:<?php echo $work; ?></p>
   <p><?php echo $example; ?></p>
-  <p><?php echo $accept; ?></p>
+  <p>accept:<?php echo $accept; ?></p>
   <p>完了</p>
 </body>
 

@@ -9,9 +9,9 @@
 
 <body>
   <form action="complete.php" method="post">
-    <input type="text" name="name" placeholder="名前" value='<?php echo $name; ?>'>
-    <p><?php echo @$errors['name']; ?></p>
-    <input type="text" name="mail" placeholder="メールアドレス（半角）" value='<?php echo $mail; ?>'>
+    <input type="text" name="name" placeholder="名前" value='<?php ?>'>
+    <p><?php echo @$errors[$value]; ?></p>
+    <input type="text" name="mail" placeholder="メールアドレス（半角）" value='<?php ?>'>
     <p><?php echo @$errors['mail']; ?></p>
     <p><?php echo @$error; ?></p>
     <p>
@@ -19,6 +19,7 @@
     </p>
     <textarea name="info" id="" cols="30" rows="10"><?php echo $info; ?></textarea>
     <p><?php echo @$errors['info']; ?></p>
+    <label for="">職種</label>
     <select name="work" id="">
       <option value="">未選択</option>
       <option value="sutudent" <?php if (@$_POST['work'] == "sutudent") {

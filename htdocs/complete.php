@@ -1,12 +1,4 @@
 <?php
-$name = "";
-$mail = "";
-$info = "";
-$accept = "";
-$work = "";
-$example = "";
-
-
 function inputCheck($input)
 {
   if ($input == "") {
@@ -15,13 +7,26 @@ function inputCheck($input)
   return true;
 }
 
-if (isset($_POST['name'])) {
-  $name = $_POST['name'];
-  inputCheck($name);
-}
-if (isset($_POST['mail'])) {
-  $mail = $_POST['mail'];
-  inputCheck($mail);
+$name = "";
+$mail = "";
+$info = "";
+$accept = "";
+$work = "";
+$example = "";
+
+$inputTexts = [
+  'name', 'mail', 'info', 'work', 'example', 'accept'
+];
+$errors = [];
+
+foreach ($inputTexts as $key) {
+  if (isset($_POST[$key])) {
+    $value = $_POST[$key];
+    inputCheck($value);
+    var_dump($inputTexts);
+    break;
+  }
+  var_dump($inputTexts);
 }
 
 $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
@@ -30,24 +35,6 @@ if (preg_match($pattern, $mail)) {
   $error = "使用できない文字が含まれています";
 }
 
-if (isset($_POST['info'])) {
-  $info = $_POST['info'];
-  inputCheck($info);
-}
-if (isset($_POST['work'])) {
-  $work = $_POST['work'];
-  inputCheck($work);
-}
-if (isset($_POST['example'])) {
-  $example = $_POST['example'];
-  inputCheck($example);
-}
-if (isset($_POST['accept'])) {
-  $accept = $_POST['accept'];
-  inputCheck($accept);
-}
-
-$errors = [];
 if (!inputCheck($name)) {
   $errors['name'] = "名前が未入力です。";
 }

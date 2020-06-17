@@ -8,42 +8,54 @@
 </head>
 
 <body>
-  <form action="complete.php" method="post">
-    <input type="text" name="name" placeholder="名前" value='<?php ?>'>
-    <p><?php echo @$errors[$value]; ?></p>
-    <input type="text" name="mail" placeholder="メールアドレス（半角）" value='<?php ?>'>
+  <form action="check.php" method="post">
+    <input type="text" name="name" placeholder="名前" value='<?php
+                                                            if (isset($_POST['name'])) {
+                                                              echo $_POST['name'];
+                                                            }
+                                                            ?>'>
+    <p><?php echo @$errors['name']; ?></p>
+    <input type="text" name="mail" placeholder="メールアドレス（半角）" value='<?php
+                                                                    if (isset($_POST['mail'])) {
+                                                                      echo $_POST['mail'];
+                                                                    }
+                                                                    ?>'>
     <p><?php echo @$errors['mail']; ?></p>
     <p><?php echo @$error; ?></p>
     <p>
       <label for="">お問い合わせ</label>
     </p>
-    <textarea name="info" id="" cols="30" rows="10"><?php echo $info; ?></textarea>
+    <textarea name="info" id="" cols="30" rows="10"><?php
+                                                    if (isset($_POST['info'])) {
+                                                      echo $_POST['info'];
+                                                    }
+                                                    ?></textarea>
     <p><?php echo @$errors['info']; ?></p>
     <label for="">職種</label>
     <select name="work" id="">
       <option value="">未選択</option>
-      <option value="sutudent" <?php if (@$_POST['work'] == "sutudent") {
+      <option value="sutudent" <?php if (isset($_POST['work']) == "sutudent") {
                                   echo 'selected="selected"';
                                 } ?>>学生</option>
-      <option value="worker" <?php if (@$_POST['work'] == "worker") {
+      <option value="worker" <?php if (isset($_POST['work']) == "worker") {
                                 echo 'selected="selected"';
                               } ?>>社会人</option>
-      <option value="other" <?php if (@$_POST['work'] == "other") {
+      <option value="other" <?php if (isset($_POST['work']) == "other") {
                               echo 'selected="selected"';
                             } ?>>その他</option>
     </select>
     <p><?php echo @$errors['work']; ?></p>
-    <label for="" id="male">男性</label>
-    <input type="radio" name="example" value="M" id="male" <?php if (@$_POST['example'] == "M") {
-                                                              echo 'checked="checked"';
-                                                            } ?>>
-    <label for="" id="female">女性</label>
-    <input type="radio" name="example" value="F" id="female" <?php if (@$_POST['example'] == "F") {
-                                                                echo 'checked="checked"';
-                                                              } ?>>
-    <p><?php echo @$errors['example']; ?></p>
+    <label for="">男性</label>
+    <input type="radio" name="gender" value="M" <?php if (isset($_POST['gender']) == "M") {
+                                                  echo 'checked="checked"';
+                                                } ?>>
+    <label for="">女性</label>
+    <input type="radio" name="gender" value="F" <?php if (isset($_POST['gender']) == "F") {
+                                                  echo 'checked="checked"';
+                                                } ?>>
+    <p><?php echo @$errors['gender']; ?></p>
     <label for="accept">同意する</label>
-    <input type="checkbox" name="accept" id="accept" value="on" <?php if (@$_POST['accept'] == "on") {
+    <input type="checkbox" name="accept" id="accept" value="on" <?php if (isset($_POST['accept']) == "on") {
                                                                   echo 'checked="checked"';
                                                                 } ?>>
     <p><?php echo @$errors['accept']; ?></p>

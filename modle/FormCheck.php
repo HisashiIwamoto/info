@@ -1,118 +1,94 @@
 <?php
 class FormCheck
 {
-  public $inputTexts = [
-    'name' => "",
-    'mail' => "",
-    'info' => "",
-    'work' => "",
-    'gender' => "",
-    'accept' => ""
-  ];
-
-  public $errors = [];
-
-  public $emptyError = [
-    'neme' => '未入力',
+  public $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+  public $error;
+  public $errors = [
+    'name' => '未入力',
     'mail' => '未入力',
     'info' => '未入力',
     'work' => '未選択',
     'gender' => '未選択',
-    'accept' => '同意が必要'
+    'accept' => '同意が必要です',
   ];
+  public $lengthError;
 
-
-  public function __construct($inputTexts = [])
+  /**
+   * @param bool
+   */
+  public function inputCheck($input)
   {
-    $this->inputTexts = $inputTexts;
-    foreach ($inputTexts as $key) {
-      if (isset($_POST[$key])) {
-        if (!empty($_POST[$key])) {
-        } else {
-          $errors[$key] = $key . "が未入力です";
-        }
-      }
+    if ($input == "") {
+      return false;
+    }
+    return true;
+  }
+  /**
+   * @param string
+   * @param erroemessage
+   */
+  public function checkName($input)
+  {
+    if (!$this->inputCheck($input)) {
+      return $this->errors['name'];
     }
   }
 
-  function getText($text)
+  public function checkMail($input)
   {
-    if (isset($text)) {
-      return $text;
-    }
-    return "";
-  }
-
-
-
-
-  public $CharacterLength = [
-    'name' => 15
-  ];
-
-  function lengthCheck($text, $key)
-  {
-    if (mb_strlen($text) > $this->lengthcheck[$key]) {
-      echo $key . "は文字数を超えています。";
+    if (!$this->inputCheck($input)) {
+      return $this->errors['mail'];
     }
   }
 
 
-  public function CheckErrorExists()
+  public function checkInfo($input)
   {
-    if (!empty($errors)) {
-      include "../view/indexhtml.php";
-      exit;
+    if (!$this->inputCheck($input)) {
+      return $this->errors['info'];
     }
   }
 
-  public $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-  public $error = "";
-  public function ValidationCheck($error)
+  public function checkWork($input)
   {
-    if (!preg_match($this->pattern, 'mail')) {
-      $error = "使用できない文字が含まれています";
-      return $error;
+    if (!$this->inputCheck($input)) {
+      return $this->errors['work'];
     }
   }
-}
 
-<?php
-$length_check =[];
-$errors = [];
-$inputTexts = [
-  'name', 'mail', 'info', 'work', 'gender', 'accept'
-];
-$mail = "";
+  public function checkGender($input)
+  {
+    if (!$this->inputCheck($input)) {
+      return $this->errors['gender'];
+    }
+  }
+  function checkAccept($input)
+  {
+    if (!$this->inputCheck($input)) {
+      return $this->errors['accept'];
+    }
+  }
 
-foreach ($inputTexts as $key) {
-  if (isset($_POST[$key])) {
-    if (!empty($_POST[$key])) {
+  /**
+   * @param string
+   * @param erroemessage
+   */
+  public function validationCheck($mail)
+  {
+    if (preg_match($this->pattern, $mail)) {
     } else {
-      $errors[$key] = $key . "が未入力です";
+      return  $this->error = "使用できない文字が含まれています";
+    }
+  }
+
+  /**
+   * @param string
+   * @param erroemessage
+   */
+  public function lengthCheck($input, $letterLimit)
+  {
+    if (mb_strlen($input) > $letterLimit) {
+      return $this->lengthError = "文字数を超えています。";
     }
   }
 }
-
-$pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-if (!preg_match($pattern, 'mail')) {
-  $error = "使用できない文字が含まれています";
-}
-
-if (!empty($errors)) {
-  include "../view/indexhtml.php";
-  exit;
-}
-
-function length_check($key,$x){
-  if (mb_strlen($_POST[$key]) > $x) {
-    echo $key."は文字数を超えています。";
-  }
-}
-
-
-
-// $mail_length = length_check('mail', 30);
-
-
-include "../view/checkhtml.php";

@@ -9,11 +9,7 @@
 
 <body>
   <form action="conf.php" method="post">
-    <input type="text" name="name" placeholder="名前" value='<?php
-                                                            if (isset($_POST['name'])) {
-                                                              echo $_POST['name'];
-                                                            }
-                                                            ?>'>
+    <input type="text" name="name" placeholder="名前" value='<?php echo $name;?>'>
     <p><?php echo @$lengthErrorName; ?></p>
     <p><?php echo @$errors['name']; ?></p>
     <input type="text" name="mail" placeholder="メールアドレス（半角）" value='<?php
@@ -22,7 +18,7 @@
                                                                     }
                                                                     ?>'>
     <p><?php echo @$error; ?></p>
-    <p><?php echo @$errors['mail'] ; ?></p>
+    <p><?php echo @$errors['mail']; ?></p>
     <p><?php echo @$lengthErrorMail; ?></p>
     <p>
       <label for="">お問い合わせ</label>
@@ -32,7 +28,7 @@
                                                       echo $_POST['info'];
                                                     }
                                                     ?></textarea>
-    <p><?php echo @$errors['info'] ; ?></p>
+    <p><?php echo @$errors['info']; ?></p>
     <p><?php echo @$lengthErrorInfo; ?></p>
     <label for="">職種</label>
     <select name="work" id="">
@@ -47,7 +43,7 @@
                               echo 'selected="selected"';
                             } ?>>その他</option>
     </select>
-    <p><?php echo @$errors['gender'] ; ?></p>
+    <p><?php echo @$errors['gender']; ?></p>
     <label for="">男性</label>
     <input type="radio" name="gender" value="M" <?php if (isset($_POST['gender']) == "M") {
                                                   echo 'checked="checked"';

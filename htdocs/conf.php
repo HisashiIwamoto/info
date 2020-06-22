@@ -1,12 +1,15 @@
 <?php
 include "../modle/FormCheck.php";
-
+include "../modle/csv.php";
 $name = "";
 $mail = "";
 $info = "";
 $accept = "";
 $work = "";
 $gender = "";
+$errorExistsCheck;
+
+
 
 if (isset($_POST['name'])) {
     $name = $_POST['name'];
@@ -26,21 +29,33 @@ if (isset($_POST['gender'])) {
 if (isset($_POST['accept'])) {
     $accept = $_POST['accept'];
 }
+
+
 $formCheck = new FormCheck();
-$errors['name'] = $formCheck->checkName($name);
-
-$errors['mail'] = $formCheck->checkMail($mail);
-$errors['info'] = $formCheck->checkInfo($info);
-$errors['work'] = $formCheck->checkWork($work);
-$errors['gender'] = $formCheck->checkGender($gender);
+if ($formCheck->checkName($naem) != null) {
+    $errors['name'] = $formCheck->checkName($name);
+}
+if ($formCheck->checkName($mail) != null) {
+    $errors['mail'] = $formCheck->checkMail($mail);
+}
+if ($formCheck->checkName($info) != null) {
+    $errors['info'] = $formCheck->checkInfo($info);
+}
+if ($formCheck->checkName($work) != null) {
+    $errors['work'] = $formCheck->checkWork($work);
+}
+if ($formCheck->checkName($gendaer) != null) {
+    $errors['gender'] = $formCheck->checkGender($gender);
+}
+if ($formCheck->checkName($accept) != null) {
 $errors['accept'] = $formCheck->checkAccept($accept);
+}
 
-
-$nailInputCheck = $formCheck->validationCheck($mail);
-var_dump($nailInputCheck);
+$error = $formCheck->validationCheck($mail);
 $lengthErrorName = $formCheck->lengthCheck($name, 10);
 $lengthErrorMail = $formCheck->lengthCheck($mail, 30);
 $lengthErrorInfo = $formCheck->lengthCheck($info, 100);
+
 
 
 if (!empty($errors)) {

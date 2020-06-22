@@ -1,6 +1,14 @@
 <?php
 class FormCheck
 {
+  public $inputText= [
+    'name'=>'',
+    'mail'=>'',
+    'info'=>'',
+    'work'=>'',
+    'gender'=>'',
+    'accept'=>''
+];
   public $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
   public $error;
   public $errors = [
@@ -12,20 +20,22 @@ class FormCheck
     'accept' => '同意が必要です',
   ];
   public $lengthError;
+  public $errorExistsCheck;
 
   /**
-   * @param bool
+   * @param mixed
+   * @return bool
    */
-  public function inputCheck($input)
+  public function inputCheck($key)
   {
-    if ($input == "") {
+    if ($key == "") {
       return false;
     }
     return true;
   }
   /**
-   * @param string
-   * @param erroemessage
+   * @param mixed
+   * @return
    */
   public function checkName($input)
   {
@@ -71,7 +81,7 @@ class FormCheck
 
   /**
    * @param string
-   * @param erroemessage
+   * @param mixed
    */
   public function validationCheck($mail)
   {
@@ -83,7 +93,8 @@ class FormCheck
 
   /**
    * @param string
-   * @param erroemessage
+   * @param mixed
+   * @return int
    */
   public function lengthCheck($input, $letterLimit)
   {

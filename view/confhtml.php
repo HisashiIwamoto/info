@@ -9,12 +9,12 @@
 
 <body>
   <p>入力内容確認</p>
-  <p>name:<?php echo $name; ?></p>
-  <p>mail:<?php echo $mail; ?></p>
-  <p>info:<?php echo $info; ?></p>
-  <p>work:<?php echo $work; ?></p>
-  <p>gender:<?php echo $gender; ?></p>
-  <p>accept:<?php echo $accept; ?></p>
+  <p>name:<?php echo $inputText['name']; ?></p>
+  <p>mail:<?php echo $inputText['mail']; ?></p>
+  <p>info:<?php echo $inputText['info']; ?></p>
+  <p>work:<?php echo $inputText['work']; ?></p>
+  <p>gender:<?php echo $inputText['gender']; ?></p>
+  <p>accept:<?php echo $inputText['accept']; ?></p>
 </body>
 
 </html>

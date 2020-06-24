@@ -30,8 +30,11 @@ $errormsg['work'] = $formCheck->check($inputText['work'], 'work');
 $errormsg['gender'] = $formCheck->check($inputText['gender'], 'gender');
 $errormsg['accept'] = $formCheck->check($inputText['accept'], 'accept');
 
-var_dump($errormsg);
-
+foreach ($errormsg as $key => $value) {
+    if ($errormsg[$key] == NULL) {
+        unset($errormsg[$key]);
+    }
+}
 
 if (!empty($errormsg)) {
     include "../view/indexhtml.php";

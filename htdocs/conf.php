@@ -1,12 +1,23 @@
 <?php
-include "../modle/FormCheck.php";
 include "../modle/csv.php";
+include "../modle/FormCheck.php";
+
+$name = "";
+$mail = "";
+$info = "";
+$accept = "";
+$work = "";
+$gender = "";
 $name = $_POST['name'];
 $mail = $_POST['mail'];
 $info = $_POST['info'];
 $work = $_POST['work'];
-$gender = $_POST['gender'];
-$accept = $_POST['accept'];
+if(isset($_POST['gender'])){
+    $gender = $_POST['gender'];
+}
+if(isset($_POST['accept'])){
+    $accept = $_POST['accept'];
+}
 
 $inputText = [
     'name' => $name,
@@ -30,6 +41,19 @@ $errormsg['work'] = $formCheck->check($inputText['work'], 'work');
 $errormsg['gender'] = $formCheck->check($inputText['gender'], 'gender');
 $errormsg['accept'] = $formCheck->check($inputText['accept'], 'accept');
 
+
+$inputtext = [
+    array($inputText['name'],$inputText['mail'],$inputText['info'],$inputText['work'],$inputText['gender'],$inputText['accept'])
+];
+
+$info =fopen("../csv/info.csv", "a");
+  foreach($inputtext as $line){
+    fputcsv($info,$line);
+  }
+
+fclose($info);
+
+
 foreach ($errormsg as $key => $value) {
     if ($errormsg[$key] == NULL) {
         unset($errormsg[$key]);
@@ -40,4 +64,5 @@ if (!empty($errormsg)) {
     include "../view/indexhtml.php";
     exit;
 }
+
 include "../view/confhtml.php";

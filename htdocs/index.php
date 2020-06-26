@@ -1,4 +1,5 @@
 <?php
+require "../modle/FormCheck.php";
 $inputText = [
   'name'=>'',
   'mail'=>'',

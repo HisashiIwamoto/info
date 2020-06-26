@@ -1,5 +1,6 @@
 <?php
 include "../modle/FormCheck.php";
+include "../modle/csv.php";
 
 $name = "";
 $mail = "";
@@ -40,35 +41,11 @@ $errormsg['work'] = $formCheck->check($inputText['work'], 'work');
 $errormsg['gender'] = $formCheck->check($inputText['gender'], 'gender');
 $errormsg['accept'] = $formCheck->check($inputText['accept'], 'accept');
 
-
-$inputtext = [
-    array(
-        $inputText['name'],
-        $inputText['mail'],
-        $inputText['info'],
-        $inputText['work'],
-        $inputText['gender'],
-        $inputText['accept']
-    )
-];
-
-$info = fopen("../csv/info.csv", "a");
-foreach ($inputtext as $line) {
-    fputcsv($info, $line);
-}
-
-fclose($info);
-
-
 foreach ($errormsg as $key => $value) {
-    if ($errormsg[$key] == NULL) {
-        unset($errormsg[$key]);
+    $value = "";
+    if (!$errormsg[$key] == $value) {
+      include "../view/indexhtml.php";
+      exit;
     }
-}
-
-if (!empty($errormsg)) {
-    include "../view/indexhtml.php";
-    exit;
-}
-
+  }
 include "../view/confhtml.php";
